@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import { Schema } from "mongoose";
+const mongoose = require("mongoose");
+const { Schema } = require("mongoose");
 
 const userSchema = new Schema({
   username: {
@@ -9,8 +9,16 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
+  },
+  email: {
+    type: String,
+    unique: true,
     required: true,
+  },
+  googleId: {
+    type: String,
+    unique: true, // Google Auth ID should be unique
   },
 });
 
-export default mongoose.model("User", userSchema);
+module.exports = mongoose.model("User", userSchema);

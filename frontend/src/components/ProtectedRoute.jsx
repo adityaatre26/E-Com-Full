@@ -1,32 +1,39 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../api";
+// import api from "../api";
 
 const ProtectedRoute = () => {
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
+  const [isValid, setIsValid] = useState(null);
+  // const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchProtectedData = async () => {
+    const verifyToken = async () => {
       try {
-        const res = await api.put("/edit", { username: "UpdatedName" }); // Example protected call
-        setUser(res.data);
+        const response = await fetch("http://localhost:5000/verifyToken", {
+          method: "POST",
+          credentials: "include",
+        });
+        if (response.ok) {
+          setIsValid(true);
+        } else {
+          setIsValid(false);
+        }
       } catch (err) {
-        console.error("Unauthorized or Token Expired", err);
-        alert("Unauthorized access! Please log in.");
-        localStorage.removeItem("token");
-        navigate("/auth");
+        console.log("Found an error while verifying token", err);
       }
     };
-    fetchProtectedData();
-  }, [navigate]);
+
+    verifyToken();
+
+    return;
+  }, []);
 
   return (
     <div>
       <h2>Protected Route</h2>
-      {user ? (
+      {isValid ? (
         <div>
-          <p>Welcome, {user.username}!</p>
+          <p>Welcome!</p>
         </div>
       ) : (
         <p>Loading...</p>

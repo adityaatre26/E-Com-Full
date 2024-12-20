@@ -18,8 +18,8 @@ const Auth = () => {
 
     try {
       const res = await api.post(endpoint, formData);
+      console.log(res);
       if (res && res.data && res.data.token) {
-        localStorage.setItem("token", res.data.token);
         alert("Authentication Successful!");
         navigate("/protected");
       } else {
@@ -42,6 +42,14 @@ const Auth = () => {
           name="username"
           placeholder="Username"
           value={formData.username}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
           onChange={handleChange}
           required
         />

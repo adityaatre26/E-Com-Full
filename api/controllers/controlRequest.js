@@ -1,11 +1,8 @@
-const express = require("express");
-const router = express.Router();
-const dotenv = require("dotenv");
 const { OAuth2Client } = require("google-auth-library");
-
+const dotenv = require("dotenv");
 dotenv.config();
 
-router.post("/", async (req, res, next) => {
+module.exports.controlRequest = async (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:5173");
   res.header("Referrer-Policy", "no-referrer-when-downgrade");
 
@@ -24,6 +21,4 @@ router.post("/", async (req, res, next) => {
   });
 
   res.json({ url: authorizeUrl });
-});
-
-module.exports = router;
+};

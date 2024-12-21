@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const dotenv = require("dotenv");
 const { OAuth2Client } = require("google-auth-library");
-const user = require("./models/user");
+const user = require("../models/user");
 const cookieParser = require("cookie-parser");
 
 dotenv.config();
@@ -40,7 +40,7 @@ const getUserData = async (access_token) => {
   }
 };
 
-router.get("/", async (req, res, next) => {
+module.exports.googleAuth = async (req, res, next) => {
   const code = req.query.code;
   try {
     const redirectUrl = "http://localhost:5000/oauth";
@@ -66,6 +66,4 @@ router.get("/", async (req, res, next) => {
   } catch (err) {
     console.log("Error while signing it with google", err);
   }
-});
-
-module.exports = router;
+};

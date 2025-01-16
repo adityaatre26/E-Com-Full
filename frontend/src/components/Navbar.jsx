@@ -37,9 +37,9 @@ const Navbar = () => {
         <ul className="menu-items hidden lg:flex">
           <li className="menu-item">
             <Link
-              to="/"
-              aria-label="Our product"
-              title="Our product"
+              to="/products"
+              aria-label="Our products"
+              title="Our products"
               className="menu-link"
             >
               Product

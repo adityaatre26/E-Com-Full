@@ -10,6 +10,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import HomePage from "./pages/HomePage";
+import ProductPage from "./pages/ProductPage";
 
 function App() {
   const isAuthenticated = !!localStorage.getItem("token");
@@ -21,6 +22,7 @@ function App() {
           {/* Public Routes */}
           <Route path="/auth" element={<Auth />} />
           <Route path="/" element={<HomePage />} />
+          <Route path="/products" element={<ProductPage/>} />
 
           {/* Protected Routes */}
           <Route

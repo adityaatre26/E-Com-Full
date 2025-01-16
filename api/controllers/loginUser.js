@@ -8,12 +8,10 @@ module.exports.loginUser = async (req, res) => {
     const User = await user.findOne({ username });
     console.log("Inside user login");
     if (!User) {
-      logger.error(err);
       return res.status(400).json({ message: "Invalid username or password" });
     }
     const isValidPassword = await bcrypt.compare(password, User.password);
     if (!isValidPassword) {
-      logger.error(err);
       return res.status(400).json({ message: "Invalid username or password" });
     }
     //creates a token with parameters provided by the user
